@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5b5d41e4ad9ec469eecae25371c7a5, type: 3}
   m_Name: Backward
   m_EditorClassIdentifier: 
-  action: Backward
+  action: backward
   artwork: {fileID: 21300000, guid: 9a0a6ab46956ee24ba202f753d3d0aa5, type: 3}

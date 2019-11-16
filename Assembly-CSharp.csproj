@@ -58,7 +58,11 @@
      <Compile Include="Assets\Scripts\CardSlot_Properties.cs" />
      <Compile Include="Assets\Scripts\Draggable_UI.cs" />
      <Compile Include="Assets\Scripts\ExecuteCards.cs" />
+     <Compile Include="Assets\Scripts\Graph.cs" />
      <Compile Include="Assets\Scripts\GridMovement.cs" />
+     <Compile Include="Assets\Scripts\Node.cs" />
+     <Compile Include="Assets\Scripts\Tile.cs" />
+     <Compile Include="Assets\Scripts\TileMap.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/UnityProjects/RoboRally/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
