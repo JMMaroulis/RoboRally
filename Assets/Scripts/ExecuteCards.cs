@@ -27,6 +27,16 @@ public class ExecuteCards : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GridMovement playerGridMovement = player.GetComponent<GridMovement>();
 
+        //insist on all cardslots being full
+        foreach (GameObject cardSlot in cardSlots)
+        {
+            if (cardSlot.transform.childCount == 0)
+            {
+                Debug.Log("PUT CARDS IN ALL THE SLOTS");
+                return;
+            }
+        }
+
         //go through cardslots in order, execute card in each carslot
         foreach (GameObject cardSlot in cardSlots)
         {
@@ -45,6 +55,11 @@ public class ExecuteCards : MonoBehaviour
             }
             Debug.Log(cardSlot.GetComponent<CardSlot_Properties>().slotNumber);
         }
+
+        SpawnCards cardSpawner = GameObject.FindObjectOfType<SpawnCards>();
+        cardSpawner.DestroyAllCards();
+        cardSpawner.SpawnNCards(7);
+
 
     }
 }

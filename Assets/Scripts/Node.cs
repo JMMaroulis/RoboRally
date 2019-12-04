@@ -7,5 +7,6 @@ public class Node
     public int GraphX;
     public int GraphY;
     public Dictionary<string, Node> Neighbours = new Dictionary<string, Node>();
-    public Tile Tile;
+    //public Tile Tile;
+    public bool VictorySpace;
 }

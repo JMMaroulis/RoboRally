@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GridMovement : MonoBehaviour
 {
+    public GameObject graph;
     static Node graphPosition;
     public static string facing;
 
@@ -38,6 +39,7 @@ public class GridMovement : MonoBehaviour
     public void MoveDirection(string direction)
     {
         graphPosition = GetNeighbour(graphPosition, direction);
+        CurrentNodeCheck();
     }
 
     public void MoveDirectionRelative(string direction)
@@ -131,6 +133,14 @@ public class GridMovement : MonoBehaviour
         Debug.Log("convering via dictionary: " + direction);
         Debug.Log("returning via dictionary: " + converter[direction]);
         facing = converter[direction];
+    }
+
+    public void CurrentNodeCheck()
+    {
+        if (graphPosition.VictorySpace == true)
+        {
+            Debug.Log("Yay, you made it!");
+        }
     }
 
     void FixedUpdate()

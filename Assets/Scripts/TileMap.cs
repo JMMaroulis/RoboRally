@@ -6,6 +6,7 @@ public class TileMap : MonoBehaviour
 {
     public static Graph Graph;
     public GameObject Tile;
+    public GameObject VictoryTile;
     int MapSizeX = 10;
     int MapSizeY = 10;
 
@@ -16,7 +17,7 @@ public class TileMap : MonoBehaviour
         Debug.Log("Finished Generating Map Data");
 
         Debug.Log("Started Generating Map Tiles");
-        GenerateMapTiles();
+        GenerateMapTiles(Graph.nodes);
         Debug.Log("Finished Generating Map Tiles");
 
     }
@@ -59,15 +60,24 @@ public class TileMap : MonoBehaviour
             }
         }
 
+        //choose random tile to be victory tile
+        Graph.nodes[Random.Range(0, MapSizeX - 1), Random.Range(0, MapSizeY - 1)].VictorySpace = true;
+
     }
 
-    void GenerateMapTiles()
+    //iterate over nodemap, spawn tiles according to tile properties
+    void GenerateMapTiles(Node[,] nodes)
     {
-        for (int x = 0; x < MapSizeX; x++)
+
+        foreach (Node node in nodes)
         {
-            for (int y = 0; y < MapSizeY; y++)
+            if (node.VictorySpace == true)
             {
-                Instantiate(Tile, new Vector3(x, y, 0), Quaternion.identity);
+                Instantiate(VictoryTile, new Vector3(node.GraphX, node.GraphY, 0), Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(Tile, new Vector3(node.GraphX, node.GraphY, 0), Quaternion.identity);
             }
         }
 

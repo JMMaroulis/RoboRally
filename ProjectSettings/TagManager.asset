@@ -8,6 +8,8 @@ TagManager:
   - CardSlot
   - Hand
   - Card
+  - Map
+  - CardSpawner
   layers:
   - Default
   - TransparentFX
