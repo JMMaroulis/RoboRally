@@ -13,23 +13,32 @@ public class GridMovement : MonoBehaviour
         //set initial node. match position to it
         //(we're assuming a 1:1 relationship between graph coordinates and gamespace coordinates here)
         graphPosition = TileMap.Graph.nodes[0, 0];
-        transform.position = new Vector3(graphPosition.GraphX, graphPosition.GraphY, -1.0f);
+        Debug.Log("start position:" + transform.position);
+        transform.position = graphPosition.Tile.transform.position;
+        Debug.Log("new position:" + transform.position);
+        //transform.localScale = graphPosition.Tile.transform.localScale;
+        transform.Translate(0, 0, -1);
+        Debug.Log("new_new position:" + transform.position);
 
-        //set facing 
+        //set sprite size
+        //SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderer.size = new Vector2(0.001f, 0.001f);
+        
+        //set facing
         facing = "up";
     }
 
     //get neighbour with given input as direction string
     static Node GetNeighbour(Node graphPosition, string direction)
     {
-        Debug.Log("looking for neighbour in direction: " + direction);
+        //Debug.Log("looking for neighbour in direction: " + direction);
         try
         {
             return graphPosition.Neighbours[direction];
         }
         catch
         {
-            Debug.Log("No neighbour found in given direction, returning self");
+            //Debug.Log("No neighbour found in given direction, returning self");
             return graphPosition;
         }
     }
@@ -39,6 +48,9 @@ public class GridMovement : MonoBehaviour
     public void MoveDirection(string direction)
     {
         graphPosition = GetNeighbour(graphPosition, direction);
+        //a bit concerned this is gonna cause some sort of 'blinking' effect as it moves from z=-1 -> z=0 -> z=-1
+        transform.position = graphPosition.Tile.transform.position;
+        transform.Translate(0, 0, -1);
         CurrentNodeCheck();
     }
 
@@ -82,8 +94,8 @@ public class GridMovement : MonoBehaviour
                 break;
         }
 
-        Debug.Log("convering via dictionary: " + direction);
-        Debug.Log("returning via dictionary: " + converter[direction]);
+        //Debug.Log("convering via dictionary: " + direction);
+        //Debug.Log("returning via dictionary: " + converter[direction]);
         return converter[direction];
     }
 
@@ -130,8 +142,8 @@ public class GridMovement : MonoBehaviour
                 break;
         }
 
-        Debug.Log("convering via dictionary: " + direction);
-        Debug.Log("returning via dictionary: " + converter[direction]);
+        //Debug.Log("convering via dictionary: " + direction);
+        //Debug.Log("returning via dictionary: " + converter[direction]);
         facing = converter[direction];
     }
 
@@ -147,25 +159,26 @@ public class GridMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            Debug.Log(graphPosition.GraphX + "_" + graphPosition.GraphY);
+            //Debug.Log(graphPosition.GraphX + "_" + graphPosition.GraphY);
             graphPosition = GetNeighbour(graphPosition, "left");
         }
         if (Input.GetKey(KeyCode.D))
         {
-            Debug.Log(graphPosition.GraphX + "_" + graphPosition.GraphY);
+            //Debug.Log(graphPosition.GraphX + "_" + graphPosition.GraphY);
             graphPosition = GetNeighbour(graphPosition, "right");
         }
         if (Input.GetKey(KeyCode.W))
         {
-            Debug.Log(graphPosition.GraphX + "_" + graphPosition.GraphY);
+            //Debug.Log(graphPosition.GraphX + "_" + graphPosition.GraphY);
             graphPosition = GetNeighbour(graphPosition, "up");
         }
         if (Input.GetKey(KeyCode.S))
         {
-            Debug.Log(graphPosition.GraphX + "_" + graphPosition.GraphY);
+            //Debug.Log(graphPosition.GraphX + "_" + graphPosition.GraphY);
             graphPosition = GetNeighbour(graphPosition, "down");
         }
-        transform.position = new Vector3(graphPosition.GraphX, graphPosition.GraphY, -1.0f);        // Move there
+        //transform.position = graphPosition.Tile.transform.position;       // Move there
+        //transform.Translate(0, 0, 0.25f);
     }
 
 }

@@ -7,8 +7,9 @@ public class TileMap : MonoBehaviour
     public static Graph Graph;
     public GameObject Tile;
     public GameObject VictoryTile;
-    int MapSizeX = 10;
-    int MapSizeY = 10;
+    public int MapSizeY = 10;
+    public int MapSizeX = 10;
+    public float mapScalingFactor = 0.75f;
 
     void Awake()
     {
@@ -19,7 +20,6 @@ public class TileMap : MonoBehaviour
         Debug.Log("Started Generating Map Tiles");
         GenerateMapTiles(Graph.nodes);
         Debug.Log("Finished Generating Map Tiles");
-
     }
 
     void GenerateMapData()
@@ -68,16 +68,20 @@ public class TileMap : MonoBehaviour
     //iterate over nodemap, spawn tiles according to tile properties
     void GenerateMapTiles(Node[,] nodes)
     {
+        float xcoord = -(MapSizeX / 2);
+        float ycoord = -(MapSizeY / 2);
 
         foreach (Node node in nodes)
         {
             if (node.VictorySpace == true)
             {
-                Instantiate(VictoryTile, new Vector3(node.GraphX, node.GraphY, 0), Quaternion.identity);
+                node.Tile = Instantiate(VictoryTile, new Vector3((xcoord + node.GraphX)*mapScalingFactor, (ycoord + node.GraphY)*mapScalingFactor, 0), Quaternion.identity);
+                node.Tile.transform.localScale = new Vector3(mapScalingFactor, mapScalingFactor, mapScalingFactor);
             }
             else
             {
-                Instantiate(Tile, new Vector3(node.GraphX, node.GraphY, 0), Quaternion.identity);
+                node.Tile = Instantiate(Tile, new Vector3((xcoord + node.GraphX) * mapScalingFactor, (ycoord + node.GraphY) * mapScalingFactor, 0), Quaternion.identity);
+                node.Tile.transform.localScale = new Vector3(mapScalingFactor, mapScalingFactor, mapScalingFactor);
             }
         }
 
