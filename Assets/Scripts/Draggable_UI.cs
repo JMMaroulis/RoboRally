@@ -39,7 +39,8 @@ public class Draggable_UI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnDrag(PointerEventData eventData)
     {
-        this.transform.position = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        //this.transform.position = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        this.transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)
