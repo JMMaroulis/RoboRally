@@ -47,7 +47,20 @@ public class GridMovement : MonoBehaviour
     //mostly going to be used in ExecuteCards.cs
     public void MoveDirection(string direction)
     {
+        Node graphDestination = GetNeighbour(graphPosition, direction);
+
+        //check that destination is not blocked off
+        if (graphDestination.BlockedSpace == true)
+        {
+            Debug.Log("Collision; no movement");
+            CurrentNodeCheck();
+            return;
+        }
+
         graphPosition = GetNeighbour(graphPosition, direction);
+
+
+
         //a bit concerned this is gonna cause some sort of 'blinking' effect as it moves from z=-1 -> z=0 -> z=-1
         transform.position = graphPosition.Tile.transform.position;
         transform.Translate(0, 0, -1);
@@ -147,6 +160,7 @@ public class GridMovement : MonoBehaviour
         facing = converter[direction];
     }
 
+    //for checking for collision and such
     public void CurrentNodeCheck()
     {
         if (graphPosition.VictorySpace == true)
@@ -155,6 +169,18 @@ public class GridMovement : MonoBehaviour
         }
     }
 
+    //for checking end-of turn stuff, like if you're on the right space
+    public void CurrentNodeCheck_MovementEnd()
+    {
+        if (graphPosition.VictorySpace == true)
+        {
+            Debug.Log("Yay, you made it!");
+            LevelReset levelReset = GameObject.FindObjectOfType<LevelReset>();
+            levelReset.ResetScene();
+        }
+    }
+
+    /*
     void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.A))
@@ -177,8 +203,6 @@ public class GridMovement : MonoBehaviour
             //Debug.Log(graphPosition.GraphX + "_" + graphPosition.GraphY);
             graphPosition = GetNeighbour(graphPosition, "down");
         }
-        //transform.position = graphPosition.Tile.transform.position;       // Move there
-        //transform.Translate(0, 0, 0.25f);
     }
-
+    */
 }

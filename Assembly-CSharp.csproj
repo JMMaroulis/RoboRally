@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\ExecuteCards.cs" />
     <Compile Include="Assets\Scripts\Graph.cs" />
     <Compile Include="Assets\Scripts\GridMovement.cs" />
+    <Compile Include="Assets\Scripts\LevelReset.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />
     <Compile Include="Assets\Scripts\SpawnCards.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
@@ -103,6 +104,9 @@
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>D:/UnityProjects/RoboRally/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.UI.Builder.Editor">
+      <HintPath>D:/UnityProjects/RoboRally/Library/ScriptAssemblies/Unity.UI.Builder.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/UnityProjects/RoboRally/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
@@ -111,9 +115,6 @@
     </Reference>
     <Reference Include="com.unity.quicksearch">
       <HintPath>D:/UnityProjects/RoboRally/Library/ScriptAssemblies/com.unity.quicksearch.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.UI.Builder.Editor">
-      <HintPath>D:/UnityProjects/RoboRally/Library/ScriptAssemblies/Unity.UI.Builder.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/UnityRoot/2019.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

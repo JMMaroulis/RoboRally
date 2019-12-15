@@ -7,6 +7,7 @@ public class TileMap : MonoBehaviour
     public static Graph Graph;
     public GameObject Tile;
     public GameObject VictoryTile;
+    public GameObject BlockedTile;
     public int MapSizeY = 10;
     public int MapSizeX = 10;
     public float mapScalingFactor = 0.75f;
@@ -77,6 +78,13 @@ public class TileMap : MonoBehaviour
             {
                 node.Tile = Instantiate(VictoryTile, new Vector3((xcoord + node.GraphX)*mapScalingFactor, (ycoord + node.GraphY)*mapScalingFactor, 0), Quaternion.identity);
                 node.Tile.transform.localScale = new Vector3(mapScalingFactor, mapScalingFactor, mapScalingFactor);
+                node.VictorySpace = true;
+            }
+            else if (Random.Range(0f, 10f) > 9f)
+            {
+                node.Tile = Instantiate(BlockedTile, new Vector3((xcoord + node.GraphX) * mapScalingFactor, (ycoord + node.GraphY) * mapScalingFactor, 0), Quaternion.identity);
+                node.Tile.transform.localScale = new Vector3(mapScalingFactor, mapScalingFactor, mapScalingFactor);
+                node.BlockedSpace = true;
             }
             else
             {

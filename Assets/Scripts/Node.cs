@@ -9,5 +9,6 @@ public class Node
     public Dictionary<string, Node> Neighbours = new Dictionary<string, Node>();
     //public Tile Tile;
     public bool VictorySpace;
+    public bool BlockedSpace;
     public GameObject Tile;
 }

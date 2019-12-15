@@ -56,6 +56,9 @@ public class ExecuteCards : MonoBehaviour
             Debug.Log(cardSlot.GetComponent<CardSlot_Properties>().slotNumber);
         }
 
+        //end of movement checks
+        playerGridMovement.CurrentNodeCheck_MovementEnd();
+
         SpawnCards cardSpawner = GameObject.FindObjectOfType<SpawnCards>();
         cardSpawner.DestroyAllCards();
         cardSpawner.SpawnNCards(7);
