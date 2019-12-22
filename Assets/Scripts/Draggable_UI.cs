@@ -61,6 +61,7 @@ public class Draggable_UI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         {  this.transform.parent = potentialParent.transform; }
 
         //put in appropriate place in hand
+        //TODO: cards defaulting to left of hand; would rather they went back where they were
         else if (potentialParent.tag == "Hand")
         {
 

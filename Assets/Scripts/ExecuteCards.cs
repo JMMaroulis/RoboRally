@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ExecuteCards : MonoBehaviour
 {
+    public float TimeBetweenCards = 0.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,12 @@ public class ExecuteCards : MonoBehaviour
         
     }
 
-    public void beepbeep()
+    public void beepshell()
+    {
+        StartCoroutine(beepbeep());
+    }
+
+    public IEnumerator beepbeep()
     {
         Debug.Log("beepbeep");
 
@@ -33,7 +40,7 @@ public class ExecuteCards : MonoBehaviour
             if (cardSlot.transform.childCount == 0)
             {
                 Debug.Log("PUT CARDS IN ALL THE SLOTS");
-                return;
+                yield break;
             }
         }
 
@@ -54,6 +61,7 @@ public class ExecuteCards : MonoBehaviour
                 playerGridMovement.Turn(cardDisplay.action.text);
             }
             Debug.Log(cardSlot.GetComponent<CardSlot_Properties>().slotNumber);
+            yield return new WaitForSeconds(TimeBetweenCards);
         }
 
         //end of movement checks
