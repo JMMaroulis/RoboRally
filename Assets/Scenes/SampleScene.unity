@@ -1125,7 +1125,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1717943872}
-        m_MethodName: beepbeep
+        m_MethodName: beepshell
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1183,6 +1183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03fa4d62256740d40ad54fa1e6a0e2c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeBetweenCards: 0.5
 --- !u!1 &1752365014
 GameObject:
   m_ObjectHideFlags: 0

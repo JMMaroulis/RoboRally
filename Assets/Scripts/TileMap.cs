@@ -77,19 +77,19 @@ public class TileMap : MonoBehaviour
             if (node.VictorySpace == true)
             {
                 node.Tile = Instantiate(VictoryTile, new Vector3((xcoord + node.GraphX)*mapScalingFactor, (ycoord + node.GraphY)*mapScalingFactor, 0), Quaternion.identity);
-                node.Tile.transform.localScale = new Vector3(mapScalingFactor, mapScalingFactor, mapScalingFactor);
+                //node.Tile.transform.localScale = new Vector3(mapScalingFactor, mapScalingFactor, mapScalingFactor);
                 node.VictorySpace = true;
             }
             else if (Random.Range(0f, 10f) > 9f)
             {
                 node.Tile = Instantiate(BlockedTile, new Vector3((xcoord + node.GraphX) * mapScalingFactor, (ycoord + node.GraphY) * mapScalingFactor, 0), Quaternion.identity);
-                node.Tile.transform.localScale = new Vector3(mapScalingFactor, mapScalingFactor, mapScalingFactor);
+                //node.Tile.transform.localScale = new Vector3(mapScalingFactor, mapScalingFactor, mapScalingFactor);
                 node.BlockedSpace = true;
             }
             else
             {
                 node.Tile = Instantiate(Tile, new Vector3((xcoord + node.GraphX) * mapScalingFactor, (ycoord + node.GraphY) * mapScalingFactor, 0), Quaternion.identity);
-                node.Tile.transform.localScale = new Vector3(mapScalingFactor, mapScalingFactor, mapScalingFactor);
+                //node.Tile.transform.localScale = new Vector3(mapScalingFactor, mapScalingFactor, mapScalingFactor);
             }
         }
 
