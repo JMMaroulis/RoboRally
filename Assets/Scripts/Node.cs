@@ -10,5 +10,6 @@ public class Node
     //public Tile Tile;
     public bool VictorySpace;
     public bool BlockedSpace;
+    public bool Occupied;
     public GameObject Tile;
 }

@@ -1411,7 +1411,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: aca56af3f572eb04abe7025ddfa5e5a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dfa6134c66844a6429d3dc6ceca2f37a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1431,7 +1431,7 @@ Transform:
   m_GameObject: {fileID: 1920853198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1579,10 +1579,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907a282bdb88f604181c2e611396bdf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tile: {fileID: 2247033700633359936, guid: b093ffa4d1ccd9c41aec3fc1d8320590, type: 3}
-  VictoryTile: {fileID: 1043451089463791423, guid: 11ecd23cffcca364e88b5340efe994bb,
+  Tile: {fileID: 5061703400174369510, guid: 9b7c10db1dc3c704c8d847656ea9da69, type: 3}
+  VictoryTile: {fileID: 6769692493516992253, guid: 8515c95449014264dbbf98d63877f9ba,
     type: 3}
-  BlockedTile: {fileID: 1758038929721723518, guid: 36a8f0fc4f36d834183d0ab62c9cce3d,
+  BlockedTile: {fileID: 6768559722530819672, guid: b324ab9837a5ebe428d564ec56c50a01,
     type: 3}
   MapSizeY: 10
   MapSizeX: 10

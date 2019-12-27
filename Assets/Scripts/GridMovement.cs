@@ -17,7 +17,10 @@ public class GridMovement : MonoBehaviour
         transform.position = graphPosition.Tile.transform.position;
         Debug.Log("new position:" + transform.position);
         //transform.localScale = graphPosition.Tile.transform.localScale;
-        transform.Translate(0, 0, -1);
+        //TODO: this is a horrific little hack that lets me do sprite layering easily with a perpective camera
+        //absolutely have to figure out how to use an orthographic camera properly
+        //(also it's being used elsewhere. eep.)
+        transform.Translate(0, 0, -0.0001f);
         Debug.Log("new_new position:" + transform.position);
 
         //set sprite size
@@ -49,21 +52,22 @@ public class GridMovement : MonoBehaviour
     {
         Node graphDestination = GetNeighbour(graphPosition, direction);
 
-        //check that destination is not blocked off
-        if (graphDestination.BlockedSpace == true)
+        //check that destination is not blocked off or occupied
+        if (graphDestination.BlockedSpace == true | graphDestination.Occupied == true)
         {
             Debug.Log("Collision; no movement");
             CurrentNodeCheck();
             return;
         }
 
+        //vacate current space, find next space, occupy it
+        graphPosition.Occupied = false;
         graphPosition = GetNeighbour(graphPosition, direction);
-
-
+        graphPosition.Occupied = true;
 
         //a bit concerned this is gonna cause some sort of 'blinking' effect as it moves from z=-1 -> z=0 -> z=-1
         transform.position = graphPosition.Tile.transform.position;
-        transform.Translate(0, 0, -1);
+        transform.Translate(0, 0, -0.00001f);
         CurrentNodeCheck();
     }
 
