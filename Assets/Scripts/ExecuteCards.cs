@@ -18,14 +18,15 @@ public class ExecuteCards : MonoBehaviour
         
     }
 
-    public void beepshell()
+    //shell exists to allow use of co-routines in a button
+    public void ExecutePlayerCardsShell()
     {
-        StartCoroutine(beepbeep());
+        StartCoroutine(ExecutePlayerCards());
     }
 
-    public IEnumerator beepbeep()
+    public IEnumerator ExecutePlayerCards()
     {
-        Debug.Log("beepbeep");
+        Debug.Log("Executing Player Cards");
 
         //get cardslots
         GameObject[] cardSlots = GameObject.FindGameObjectsWithTag("CardSlot");

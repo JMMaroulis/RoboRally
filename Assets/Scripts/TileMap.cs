@@ -21,8 +21,6 @@ public class TileMap : MonoBehaviour
         Debug.Log("Started Generating Map Tiles");
         GenerateMapTiles(Graph.nodes);
         Debug.Log("Finished Generating Map Tiles");
-
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void GenerateMapData()
