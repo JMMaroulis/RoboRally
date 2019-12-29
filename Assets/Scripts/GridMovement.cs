@@ -5,8 +5,8 @@ using UnityEngine;
 public class GridMovement : MonoBehaviour
 {
     public GameObject graph;
-    static Node graphPosition;
-    public static string facing;
+    public Node graphPosition;
+    public string facing;
 
     void Start()
     {

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class Card : ScriptableObject
+public class Card : MonoBehaviour
 {
     public string action;
-    public Sprite artwork;
 
     public void PrintAction()
     {

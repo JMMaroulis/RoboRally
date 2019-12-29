@@ -10,6 +10,7 @@ TagManager:
   - Card
   - Map
   - CardSpawner
+  - AI Player
   layers:
   - Default
   - TransparentFX

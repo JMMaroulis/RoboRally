@@ -37,6 +37,20 @@ public class SpawnCards : MonoBehaviour
         }
     }
 
+    public List<GameObject> SpawnNCards_List(int numCards)
+    {
+        List<GameObject> cards = new List<GameObject>();
+        int cardCount = 0;
+        while (cardCount < numCards)
+        {
+            int index = Random.Range(0, Cards.Length);
+            cards.Add(Cards[index]);
+            cardCount += 1;
+        }
+
+        return cards;
+    }
+
     public void DestroyAllCards()
     {
         GameObject[] cards = GameObject.FindGameObjectsWithTag("Card");
