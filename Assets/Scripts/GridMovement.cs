@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class GridMovement : MonoBehaviour
 {
-    public GameObject graph;
     public Node graphPosition;
     public string facing;
 
     void Start()
     {
-        //set initial node. match position to it
-        //(we're assuming a 1:1 relationship between graph coordinates and gamespace coordinates here)
+        //choose random initial node, check viability, set and match position to it
+        while (graphPosition == null)
+        {
+            //Random.InitState((int)System.DateTime.Now.Ticks);
+            int xPosition = Random.Range(0, TileMap.Graph.nodes.GetLength(0));
+            int yPosition = Random.Range(0, TileMap.Graph.nodes.GetLength(1));
+            Node proposedNode = TileMap.Graph.nodes[xPosition, yPosition];
+
+            if (proposedNode.BlockedSpace == false && proposedNode.VictorySpace == false && proposedNode.Occupied == false)
+            {
+                graphPosition = proposedNode;
+                transform.position = graphPosition.Tile.transform.position;
+            }
+        }
+        /*
         graphPosition = TileMap.Graph.nodes[0, 0];
         Debug.Log("start position:" + transform.position);
         transform.position = graphPosition.Tile.transform.position;
         Debug.Log("new position:" + transform.position);
-        //transform.localScale = graphPosition.Tile.transform.localScale;
+        */
+
         //TODO: this is a horrific little hack that lets me do sprite layering easily with a perpective camera
         //absolutely have to figure out how to use an orthographic camera properly
         //(also it's being used elsewhere. eep.)
