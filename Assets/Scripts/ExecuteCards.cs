@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ExecuteCards : MonoBehaviour
 {
@@ -21,23 +22,31 @@ public class ExecuteCards : MonoBehaviour
     }
 
     //shell exists to allow use of co-routines in a button
-    public void ExecutePlayerCardsShell()
+    public void ExecuteCardsShell()
     {
-        StartCoroutine(ExecuteAICards());
+        StartCoroutine(ExecuteAllCards());
     }
 
-    public IEnumerator ExecutePlayerCards()
+    public IEnumerator ExecuteAllCards()
     {
-        Debug.Log("Executing Player Cards");
 
-        //get cardslots
+        Debug.Log("Executing All Cards");
+
+        //get player objects
+        //currently running the AI turns in an essentially random order. No bueno.
+        List<GameObject> players = GameObject.FindGameObjectsWithTag("AI Player").ToList<GameObject>();
+        players.Add(GameObject.FindGameObjectWithTag("Player"));
+
+        //get card list for each AI player
+        //TODO: remove assumption that there's only one human player (players.count-1)
+        List<List<GameObject>> hands = new List<List<GameObject>>();
+        for (int i = 0; i < players.Count - 1; i++)
+        {
+            hands.Add(cardSpawner.SpawnNCards_List(5));
+        }
+
+        //get cards for human player, insist all cardslots are full
         GameObject[] cardSlots = GameObject.FindGameObjectsWithTag("CardSlot");
-
-        //get player object
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        GridMovement playerGridMovement = player.GetComponent<GridMovement>();
-
-        //insist on all cardslots being full
         foreach (GameObject cardSlot in cardSlots)
         {
             if (cardSlot.transform.childCount == 0)
@@ -47,69 +56,46 @@ public class ExecuteCards : MonoBehaviour
             }
         }
 
-        //go through cardslots in order, execute card in each carslot
-        foreach (GameObject cardSlot in cardSlots)
+        //get cards from cardslots
+        List<GameObject> humanCards = new List<GameObject>();
+        foreach (var cardSlot in cardSlots)
         {
-            Card card = cardSlot.transform.GetChild(0).gameObject.GetComponent<Card>();
-            string action = card.action;
+            humanCards.Add(cardSlot.transform.GetChild(0).gameObject);
+        }
+        hands.Add(humanCards);
 
-            //todo: move this logic to gridmovement.cs
-            Debug.Log(action);
-            if (action == "forward" || action == "backward")
+        //ACTUALLY EXECUTING THE CARDS NOW
+        //loop over card number
+        for (int i = 0; i < 5; i++)
+        {
+            //loop over player
+            for (int j = 0; j < hands.Count; j++)
             {
-                playerGridMovement.MoveDirectionRelative(action);
+                GridMovement playerGridMovement = players[j].GetComponent<GridMovement>();
+                string action = hands[j][i].GetComponent<Card>().action;
+
+                //todo: move this logic to gridmovement.cs
+                Debug.Log(action);
+                if (action == "forward" || action == "backward")
+                {
+                    playerGridMovement.MoveDirectionRelative(action);
+                }
+                if (action == "left" || action == "right")
+                {
+                    playerGridMovement.Turn(action);
+                }
+                yield return new WaitForSeconds(TimeBetweenCards);
             }
-            if (action == "left" || action == "right")
-            {
-                playerGridMovement.Turn(action);
-            }
-            Debug.Log(cardSlot.GetComponent<CardSlot_Properties>().slotNumber);
-            yield return new WaitForSeconds(TimeBetweenCards);
         }
 
         //end of movement checks
-        playerGridMovement.CurrentNodeCheck_MovementEnd();
+        foreach (GameObject player in players)
+        {
+            player.GetComponent<GridMovement>().CurrentNodeCheck_MovementEnd();
+        }
 
         //reset hand for new turn
         cardSpawner.DestroyAllCards();
         cardSpawner.SpawnNCards(7);
-    }
-
-    public IEnumerator ExecuteAICards()
-    {
-        Debug.Log("Executing AI Cards");
-
-        //get player object
-        GameObject player = GameObject.FindGameObjectWithTag("AI Player");
-        GridMovement playerGridMovement = player.GetComponent<GridMovement>();
-
-        //generate chosen AI cards
-        //(this is going to need rewriting sooner rather than later, I imagine. not condusive to weighting cards differently right now)
-        List<GameObject> AICards = cardSpawner.SpawnNCards_List(5);
-        
-        //go through ai cards, execute in order
-        foreach (GameObject cardObject in AICards)
-        {
-            string action = cardObject.GetComponent<Card>().action;
-
-            //todo: move this logic to gridmovement.cs
-            Debug.Log(action);
-            if (action == "forward" || action == "backward")
-            {
-                playerGridMovement.MoveDirectionRelative(action);
-            }
-            if (action == "left" || action == "right")
-            {
-                playerGridMovement.Turn(action);
-            }
-            yield return new WaitForSeconds(TimeBetweenCards);
-        }
-
-        //end of movement checks
-        playerGridMovement.CurrentNodeCheck_MovementEnd();
-
-        //run player cards after the ai cards
-        StartCoroutine(ExecutePlayerCards());
-
     }
 }
